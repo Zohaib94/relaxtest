@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_152429) do
+ActiveRecord::Schema.define(version: 2020_06_04_155903) do
+
+  create_table "dashboard_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "item_type", default: 0
+    t.boolean "display", default: true
+    t.text "content"
+    t.bigint "dashboard_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["dashboard_id"], name: "index_dashboard_items_on_dashboard_id"
+  end
 
   create_table "dashboards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title"
@@ -33,5 +43,6 @@ ActiveRecord::Schema.define(version: 2020_06_04_152429) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "dashboard_items", "dashboards"
   add_foreign_key "dashboards", "users"
 end

@@ -1,5 +1,6 @@
 class Dashboard < ApplicationRecord
   belongs_to :user
+  has_many :dashboard_items, dependent: :destroy
 
   validates :order, numericality: true, uniqueness: true
   validates :title, length: { minimum: 8, maximum: 128 }
