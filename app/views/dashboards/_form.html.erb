@@ -21,6 +21,17 @@
     <%= form.number_field :order %>
   </div>
 
+  <h3>Dashboard Items (Text contents for now)</h3>
+
+  <div id='dashboard_items'>
+    <%= form.fields_for :dashboard_items do |dashboard_item| %>
+      <%= render 'dashboard_item_fields', f: dashboard_item %>
+    <% end %>
+    <div class='links'>
+      <%= link_to_add_association 'Add another text content', form, :dashboard_items %>
+    </div>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

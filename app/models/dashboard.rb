@@ -6,4 +6,6 @@ class Dashboard < ApplicationRecord
   validates :title, length: { minimum: 8, maximum: 128 }
 
   scope :sorted_for, -> (dashboard_user) { where(user: dashboard_user).order(:order) }
+
+  accepts_nested_attributes_for :dashboard_items, allow_destroy: true, reject_if: :all_blank
 end

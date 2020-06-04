@@ -51,6 +51,7 @@ class DashboardsController < ApplicationController
     end
 
     def dashboard_params
-      params.require(:dashboard).permit(:title, :order, :user_id).merge(user: current_user)
+      dashboard_items_attributes = DashboardItem.attribute_names.map(&:to_sym).push(:_destroy)
+      params.require(:dashboard).permit(:title, :order, :user_id, dashboard_items_attributes: dashboard_items_attributes).merge(user: current_user)
     end
 end
