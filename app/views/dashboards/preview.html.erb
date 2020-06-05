@@ -1,0 +1,12 @@
+<h1>Previewing User Dashboards</h1>
+
+<% @dashboards.each do |dashboard| %>
+  <div class='jumbotron jumbotron-fluid'>
+    <h2><%= dashboard.title %></h2>
+    <% dashboard.dashboard_items.each do |item| %>
+      <% if item.text_content? %>
+        <%= item.content %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
