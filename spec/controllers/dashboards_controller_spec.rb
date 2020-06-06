@@ -4,9 +4,7 @@ require 'rails_helper'
 
 RSpec.describe DashboardsController, type: :controller do
   describe 'GET #index' do
-    before(:each) do
-      sign_in create(:user)
-    end
+    before(:each) { sign_in create(:user) }
 
     it 'renders index template' do
       get :index
@@ -16,9 +14,7 @@ RSpec.describe DashboardsController, type: :controller do
 
   describe 'POST #create' do
     context 'with valid params' do
-      before(:each) do
-        sign_in create(:user)
-      end
+      before(:each) { sign_in create(:user) }
 
       let(:dashboard_params) do
         {
@@ -40,9 +36,7 @@ RSpec.describe DashboardsController, type: :controller do
     end
 
     context 'with invalid params' do
-      before(:each) do
-        sign_in create(:user)
-      end
+      before(:each) { sign_in create(:user) }
 
       let(:dashboard_params) do
         {
@@ -60,9 +54,7 @@ RSpec.describe DashboardsController, type: :controller do
 
   describe 'PATCH #update' do
     context 'with valid params' do
-      before(:each) do
-        sign_in create(:user)
-      end
+      before(:each) { sign_in create(:user) }
 
       let(:dashboard) { create(:dashboard, user: User.last) }
       let(:dashboard_items_params) do
@@ -89,9 +81,7 @@ RSpec.describe DashboardsController, type: :controller do
 
   describe 'GET #preview' do
     context 'with valid params' do
-      before(:each) do
-        sign_in create(:user)
-      end
+      before(:each) { sign_in create(:user) }
 
       it 'displays review page' do
         get :preview
@@ -105,6 +95,26 @@ RSpec.describe DashboardsController, type: :controller do
         get :preview
         orders = assigns(:dashboards).pluck(:order)
         expect(orders).to eq(orders.sort)
+      end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    context 'with valid params' do
+      before(:each) { sign_in create(:user) }
+
+      it 'destroys the requested dashboard' do
+        dashboard = create(:dashboard, user: User.last)
+        expect do
+          delete :destroy, params: { id: dashboard.to_param }
+        end.to change(Dashboard, :count).by(-1)
+      end
+
+      it 'redirects to the dashboards list' do
+        dashboard = create(:dashboard, user: User.last)
+
+        delete :destroy, params: { id: dashboard.to_param }
+        expect(response).to redirect_to(dashboards_url)
       end
     end
   end
