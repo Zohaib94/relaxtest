@@ -6,4 +6,6 @@ class DashboardItem < ApplicationRecord
   enum item_type: [:text_content]
 
   has_rich_text :content
+
+  validates :content, presence: true
 end
