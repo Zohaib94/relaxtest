@@ -3,7 +3,8 @@
 FactoryBot.define do
   factory :dashboard_item do
     content { Faker::Lorem.sentence }
-    item_type { 0 }
+    item_type { 'text_content' }
+    display { true }
     association :dashboard
   end
 end

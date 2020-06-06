@@ -57,4 +57,33 @@ RSpec.describe DashboardsController, type: :controller do
       end
     end
   end
+
+  describe 'PATCH #update' do
+    context 'with valid params' do
+      before(:each) do
+        sign_in create(:user)
+      end
+
+      let(:dashboard) { create(:dashboard) }
+      let(:dashboard_items_params) do
+        {
+          id: dashboard.id,
+          dashboard: attributes_for(:dashboard,
+                                    dashboard_items_attributes: [attributes_for(:dashboard_item, dashboard: dashboard)],
+                                    user: User.first)
+        }
+      end
+
+      it 'updates dashboard and adds a new dashboard item' do
+        expect do
+          patch :update, params: dashboard_items_params
+        end.to change(DashboardItem, :count).by(1)
+      end
+
+      it 'redirects to the updated dashboard' do
+        patch :update, params: dashboard_items_params
+        expect(response).to redirect_to(Dashboard.last)
+      end
+    end
+  end
 end
