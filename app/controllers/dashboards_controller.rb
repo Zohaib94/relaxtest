@@ -1,20 +1,20 @@
+# frozen_string_literal: true
+
 class DashboardsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_dashboard, only: [:show, :edit, :update, :destroy]
+  before_action :set_dashboard, only: %i[show edit update destroy]
 
   def index
     @dashboards = Dashboard.sorted_for(current_user)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @dashboard = Dashboard.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @dashboard = Dashboard.new(dashboard_params)
@@ -50,12 +50,16 @@ class DashboardsController < ApplicationController
   end
 
   private
-    def set_dashboard
-      @dashboard = Dashboard.find(params[:id])
-    end
 
-    def dashboard_params
-      dashboard_items_attributes = DashboardItem.attribute_names.map(&:to_sym).push(:_destroy)
-      params.require(:dashboard).permit(:title, :order, :user_id, dashboard_items_attributes: dashboard_items_attributes).merge(user: current_user)
-    end
+  def set_dashboard
+    @dashboard = Dashboard.find(params[:id])
+  end
+
+  def dashboard_params
+    dashboard_items_attributes = DashboardItem.attribute_names.map(&:to_sym).push(:_destroy)
+    params
+      .require(:dashboard)
+      .permit(:title, :order, :user_id, dashboard_items_attributes: dashboard_items_attributes)
+      .merge(user: current_user)
+  end
 end
