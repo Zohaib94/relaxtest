@@ -64,7 +64,7 @@ RSpec.describe DashboardsController, type: :controller do
         sign_in create(:user)
       end
 
-      let(:dashboard) { create(:dashboard) }
+      let(:dashboard) { create(:dashboard, user: User.last) }
       let(:dashboard_items_params) do
         {
           id: dashboard.id,
