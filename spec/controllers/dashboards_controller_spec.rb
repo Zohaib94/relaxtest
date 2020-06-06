@@ -4,10 +4,57 @@ require 'rails_helper'
 
 RSpec.describe DashboardsController, type: :controller do
   describe 'GET #index' do
-    it 'renders index template' do
+    before(:each) do
       sign_in create(:user)
+    end
+
+    it 'renders index template' do
       get :index
       expect(response).to render_template('index')
+    end
+  end
+
+  describe 'POST #create' do
+    context 'with valid params' do
+      before(:each) do
+        sign_in create(:user)
+      end
+
+      let(:dashboard_params) do
+        {
+          dashboard: attributes_for(:dashboard),
+          user: User.first
+        }
+      end
+
+      it 'creates a new dashboard' do
+        expect do
+          post :create, params: dashboard_params
+        end.to change(Dashboard, :count).by(1)
+      end
+
+      it 'redirects to the created dashboard' do
+        post :create, params: dashboard_params
+        expect(response).to redirect_to(Dashboard.last)
+      end
+    end
+
+    context 'with invalid params' do
+      before(:each) do
+        sign_in create(:user)
+      end
+
+      let(:dashboard_params) do
+        {
+          dashboard: attributes_for(:dashboard, :invalid),
+          user: User.first
+        }
+      end
+
+      it 're-renders the new form on create' do
+        post :create, params: dashboard_params
+        expect(response).to render_template :new
+      end
     end
   end
 end
