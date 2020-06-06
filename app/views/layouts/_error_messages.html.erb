@@ -1,0 +1,14 @@
+<% if object.errors.any? %>
+  <div class='card border-danger'>
+    <div class='card-header bg-danger text-white'>
+      <%= pluralize(object.errors.count, 'error') %> prohibited this <%= object.class.name.downcase %> from being saved:
+    </div>
+    <div class='card-body'>
+      <ul class='mb-0'>
+        <% object.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
