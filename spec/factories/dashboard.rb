@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :dashboard do
     title { Faker::Lorem.sentence }
-    sequence(:order) { |n| n }
+    order { Faker::Number.unique.between(from: 1, to: 1000) }
     association :user
 
     trait :invalid do

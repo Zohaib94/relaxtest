@@ -86,4 +86,26 @@ RSpec.describe DashboardsController, type: :controller do
       end
     end
   end
+
+  describe 'GET #preview' do
+    context 'with valid params' do
+      before(:each) do
+        sign_in create(:user)
+      end
+
+      it 'displays review page' do
+        get :preview
+        expect(response).to render_template('preview')
+      end
+
+      it 'shows dashboards in ascending order of the order given' do
+        create(:dashboard, user: User.last)
+        create(:dashboard, user: User.last)
+
+        get :preview
+        orders = assigns(:dashboards).pluck(:order)
+        expect(orders).to eq(orders.sort)
+      end
+    end
+  end
 end
