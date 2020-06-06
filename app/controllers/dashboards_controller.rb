@@ -19,30 +19,24 @@ class DashboardsController < ApplicationController
   def create
     @dashboard = Dashboard.new(dashboard_params)
 
-    respond_to do |format|
-      if @dashboard.save
-        format.html { redirect_to @dashboard, notice: 'Dashboard was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @dashboard.save
+      redirect_to @dashboard, notice: 'Dashboard was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @dashboard.update(dashboard_params)
-        format.html { redirect_to @dashboard, notice: 'Dashboard was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @dashboard.update(dashboard_params)
+      redirect_to @dashboard, notice: 'Dashboard was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @dashboard.destroy
-    respond_to do |format|
-      format.html { redirect_to dashboards_url, notice: 'Dashboard was successfully destroyed.' }
-    end
+    redirect_to dashboards_url, notice: 'Dashboard was successfully destroyed.'
   end
 
   def preview
@@ -53,6 +47,7 @@ class DashboardsController < ApplicationController
 
   def set_dashboard
     @dashboard = Dashboard.find(params[:id])
+    redirect_to root_path, notice: 'You can not access this dashboard' unless current_user.eql?(@dashboard.user)
   end
 
   def dashboard_params
