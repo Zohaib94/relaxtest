@@ -1,24 +1,13 @@
-# README
+# Relax Gaming Test Application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Loom Video Link for all functionalities mentioned:
+https://www.loom.com/share/5aba683077504b54b7267d868657b9c5
 
-Things you may want to cover:
+Heroku Deployment Link:
+https://glacial-mountain-43074.herokuapp.com/
 
-* Ruby version
+Run Tests:
+`bundle exec rspec`
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Run RuboCop:
+`bundle exec rubocop -aF`
