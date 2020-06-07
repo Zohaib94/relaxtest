@@ -3,12 +3,50 @@
 require 'rails_helper'
 
 RSpec.describe DashboardsController, type: :controller do
+  INVALID_DASHBOARD_ID = 0
+
   describe 'GET #index' do
     before(:each) { sign_in create(:user) }
 
     it 'renders index template' do
       get :index
       expect(response).to render_template('index')
+    end
+  end
+
+  describe 'GET #edit' do
+    context 'with valid params' do
+      before(:each) { sign_in create(:user) }
+
+      it 'renders the edit page' do
+        dashboard = create(:dashboard, user: User.last)
+
+        get :edit, params: { id: dashboard.to_param }
+        expect(response).to render_template('edit')
+      end
+    end
+
+    context 'with invalid params' do
+      before(:each) { sign_in create(:user) }
+
+      it 'redirects to dashboard index page with a notice' do
+        get :edit, params: { id: INVALID_DASHBOARD_ID }
+        expect(response.request.flash[:notice]).to_not be_nil
+        expect(response).to redirect_to(root_url)
+      end
+    end
+
+    context 'with dashboard user does not own' do
+      before(:each) { sign_in create(:user) }
+
+      it 'redirects to dashboard index page with a notice' do
+        user = create(:user)
+        dashboard = create(:dashboard, user: user)
+
+        get :edit, params: { id: dashboard.to_param }
+        expect(response.request.flash[:notice]).to_not be_nil
+        expect(response).to redirect_to(root_url)
+      end
     end
   end
 
