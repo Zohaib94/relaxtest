@@ -139,8 +139,8 @@ RSpec.describe DashboardsController, type: :controller do
         create(:dashboard, user: User.last)
 
         get :preview
-        orders = assigns(:dashboards).pluck(:order)
-        expect(orders).to eq(orders.sort)
+        positions = assigns(:dashboards).pluck(:position)
+        expect(positions).to eq(positions.sort)
       end
     end
   end

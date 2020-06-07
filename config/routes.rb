@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     collection do
       get :preview
     end
+
+    member do
+      patch :sort
+    end
   end
 
   devise_for :users

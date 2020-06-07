@@ -2,7 +2,7 @@
 
 class DashboardsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_dashboard, only: %i[edit update destroy]
+  before_action :set_dashboard, only: %i[edit update destroy sort]
 
   def index
     @dashboards = Dashboard.sorted_for(current_user)
@@ -42,6 +42,11 @@ class DashboardsController < ApplicationController
     redirect_to root_path, notice: 'You have not added any dashboard yet!' if @dashboards.blank?
   end
 
+  def sort
+    @dashboard.insert_at(dashboard_params[:position].to_i)
+    head :ok
+  end
+
   private
 
   def set_dashboard
@@ -53,7 +58,7 @@ class DashboardsController < ApplicationController
     dashboard_items_attributes = DashboardItem.attribute_names.map(&:to_sym).push(:_destroy)
     params
       .require(:dashboard)
-      .permit(:title, :order, :user_id, dashboard_items_attributes: dashboard_items_attributes)
+      .permit(:title, :position, :user_id, dashboard_items_attributes: dashboard_items_attributes)
       .merge(user: current_user)
   end
 end
