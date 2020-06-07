@@ -39,6 +39,7 @@ class DashboardsController < ApplicationController
 
   def preview
     @dashboards = Dashboard.sorted_with_content_for(current_user)
+    redirect_to root_path, notice: 'You have not added any dashboard yet!' if @dashboards.blank?
   end
 
   private

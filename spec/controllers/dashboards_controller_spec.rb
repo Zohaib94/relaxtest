@@ -121,7 +121,15 @@ RSpec.describe DashboardsController, type: :controller do
     context 'with valid params' do
       before(:each) { sign_in create(:user) }
 
-      it 'displays review page' do
+      it 'redirects to root path if no dashboard is present' do
+        get :preview
+        expect(response.request.flash[:notice]).to_not be_nil
+        expect(response).to redirect_to(root_url)
+      end
+
+      it 'displays review page if dashboard is present' do
+        create(:dashboard, user: User.last)
+
         get :preview
         expect(response).to render_template('preview')
       end
