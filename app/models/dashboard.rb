@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Dashboard < ApplicationRecord
+  include Hashid::Rails
+
   acts_as_list
 
   belongs_to :user
