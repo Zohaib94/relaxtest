@@ -31,7 +31,7 @@ RSpec.describe DashboardsController, type: :controller do
 
       it 'redirects to the created dashboard' do
         post :create, params: dashboard_params
-        expect(response).to redirect_to(Dashboard.last)
+        expect(response).to redirect_to(dashboards_url)
       end
     end
 
@@ -74,7 +74,7 @@ RSpec.describe DashboardsController, type: :controller do
 
       it 'redirects to the updated dashboard' do
         patch :update, params: dashboard_items_params
-        expect(response).to redirect_to(Dashboard.last)
+        expect(response).to redirect_to(dashboards_url)
       end
     end
   end

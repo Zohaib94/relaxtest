@@ -2,13 +2,11 @@
 
 class DashboardsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_dashboard, only: %i[show edit update destroy]
+  before_action :set_dashboard, only: %i[edit update destroy]
 
   def index
     @dashboards = Dashboard.sorted_for(current_user)
   end
-
-  def show; end
 
   def new
     @dashboard = Dashboard.new
@@ -20,7 +18,7 @@ class DashboardsController < ApplicationController
     @dashboard = Dashboard.new(dashboard_params)
 
     if @dashboard.save
-      redirect_to @dashboard, notice: 'Dashboard was successfully created.'
+      redirect_to dashboards_url, notice: 'Dashboard was successfully created.'
     else
       render :new
     end
@@ -28,7 +26,7 @@ class DashboardsController < ApplicationController
 
   def update
     if @dashboard.update(dashboard_params)
-      redirect_to @dashboard, notice: 'Dashboard was successfully updated.'
+      redirect_to dashboards_url, notice: 'Dashboard was successfully updated.'
     else
       render :edit
     end
