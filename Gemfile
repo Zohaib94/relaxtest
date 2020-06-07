@@ -55,6 +55,7 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'acts_as_list'
 gem 'cocoon'
 gem 'devise'
 gem 'pg'
