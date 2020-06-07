@@ -4,7 +4,7 @@
   <div class='jumbotron jumbotron-fluid'>
     <h2><%= dashboard.title %></h2>
     <% dashboard.dashboard_items.each do |item| %>
-      <% if item.text_content? %>
+      <% if displayable_text_content?(item) %>
         <%= item.content %>
       <% end %>
     <% end %>
