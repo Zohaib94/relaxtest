@@ -1,0 +1,21 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th scope='col'>#</th>
+      <th scope='col'>Title</th>
+      <th scope='col'>User</th>
+      <th scope='col' colspan='3'>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @dashboards.each do |dashboard| %>
+      <tr>
+        <th scope='row'><%= dashboard.order %></th>
+        <td><%= dashboard.title %></td>
+        <td><%= user_of(dashboard) %></td>
+        <td><%= link_to 'Edit', edit_dashboard_path(dashboard), class: 'btn btn-dark' %></td>
+        <td><%= link_to 'Destroy', dashboard, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
