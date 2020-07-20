@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_20_170329) do
+ActiveRecord::Schema.define(version: 2020_07_20_181504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,7 +94,6 @@ ActiveRecord::Schema.define(version: 2020_07_20_170329) do
   create_table "log_receipts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "invoiced_at"
-    t.float "weight"
     t.float "average_diameter"
     t.integer "quantity"
     t.float "average_weight"
