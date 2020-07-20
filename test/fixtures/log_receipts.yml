@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  invoiced_at: 2020-07-20 20:03:29
+  weight: 1.5
+  average_diameter: 1.5
+  quantity: 1
+  average_weight: 1.5
+  average_length: 1.5
+  amount: 1.5
+
+two:
+  user: two
+  invoiced_at: 2020-07-20 20:03:29
+  weight: 1.5
+  average_diameter: 1.5
+  quantity: 1
+  average_weight: 1.5
+  average_length: 1.5
+  amount: 1.5

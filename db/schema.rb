@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_20_163509) do
+ActiveRecord::Schema.define(version: 2020_07_20_170329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,20 @@ ActiveRecord::Schema.define(version: 2020_07_20_163509) do
     t.index ["user_id"], name: "index_dashboards_on_user_id"
   end
 
+  create_table "log_receipts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "invoiced_at"
+    t.float "weight"
+    t.float "average_diameter"
+    t.integer "quantity"
+    t.float "average_weight"
+    t.float "average_length"
+    t.float "amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_log_receipts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -106,4 +120,5 @@ ActiveRecord::Schema.define(version: 2020_07_20_163509) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "dashboard_items", "dashboards"
   add_foreign_key "dashboards", "users"
+  add_foreign_key "log_receipts", "users"
 end
