@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_20_181504) do
+ActiveRecord::Schema.define(version: 2020_07_21_131851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,13 @@ ActiveRecord::Schema.define(version: 2020_07_20_181504) do
     t.index ["user_id"], name: "index_dashboards_on_user_id"
   end
 
+  create_table "log_images", force: :cascade do |t|
+    t.bigint "log_receipt_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["log_receipt_id"], name: "index_log_images_on_log_receipt_id"
+  end
+
   create_table "log_receipts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "invoiced_at"
@@ -119,5 +126,6 @@ ActiveRecord::Schema.define(version: 2020_07_20_181504) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "dashboard_items", "dashboards"
   add_foreign_key "dashboards", "users"
+  add_foreign_key "log_images", "log_receipts"
   add_foreign_key "log_receipts", "users"
 end
