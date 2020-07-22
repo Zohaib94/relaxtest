@@ -8,4 +8,11 @@ class User < ApplicationRecord
 
   has_many :dashboards
   has_many :log_receipts
+
+  ROLES = {
+    free: 'free',
+    premium: 'premium'
+  }
+
+  enum role: ROLES
 end
