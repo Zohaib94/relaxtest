@@ -14,7 +14,7 @@ ActiveAdmin.register LogReceipt do
       f.has_many :log_images, heading: 'Log Images',
                               allow_destroy: true,
                               new_record: true do |attachment|
-        attachment_thumbnail = attachment.object.thumbnail ? image_tag(attachment.object.thumbnail) : nil
+        attachment_thumbnail = attachment.object.display_thumbnail? ? image_tag(attachment.object.thumbnail) : nil
         attachment.input :attached_image, hint: attachment_thumbnail, as: :file
       end
     end

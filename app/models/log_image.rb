@@ -17,6 +17,10 @@ class LogImage < ApplicationRecord
     attached_image.variant(resize_to_limit: [THUMBNAIL_WIDTH, nil])
   end
 
+  def display_thumbnail?
+    attached_image.attached? && attached_image.persisted?
+  end
+
   private
 
   def image_file?
