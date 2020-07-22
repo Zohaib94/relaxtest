@@ -1,0 +1,7 @@
+<h1>Gallery</h1>
+
+<% if @log_receipt.log_images.present? %>
+  <%= render 'log_receipts/partials/gallery' %>
+<% else %>
+  <%= render 'log_receipts/partials/landing_text', text: 'You do not have any images at the moment!' %>
+<% end %>

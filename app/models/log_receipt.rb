@@ -1,4 +1,6 @@
 class LogReceipt < ApplicationRecord
+  include Hashid::Rails
+
   belongs_to :user
 
   has_many :log_images, dependent: :destroy

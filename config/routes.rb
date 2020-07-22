@@ -2,7 +2,9 @@
 
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
+
   ActiveAdmin.routes(self)
+
   resources :dashboards, except: [:show] do
     collection do
       get :preview
@@ -13,7 +15,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :log_receipts, only: [:index, :show]
+
   devise_for :users
 
-  root to: 'dashboards#index'
+  root to: 'log_receipts#index'
 end
