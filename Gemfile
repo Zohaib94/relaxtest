@@ -63,3 +63,4 @@ gem 'hashid-rails', '~> 1.0'
 gem 'image_processing', '~> 1.2'
 gem 'pg'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'pundit'
