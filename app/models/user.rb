@@ -12,7 +12,7 @@ class User < ApplicationRecord
   ROLES = {
     free: 'free',
     premium: 'premium'
-  }
+  }.freeze
 
   enum role: ROLES
 end
