@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LogReceiptsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_log_receipt, only: %i[show]
@@ -6,8 +8,7 @@ class LogReceiptsController < ApplicationController
     @log_receipts = current_user.log_receipts
   end
 
-  def show
-  end
+  def show; end
 
   private
 

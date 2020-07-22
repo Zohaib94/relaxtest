@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :log_receipts, only: [:index, :show]
+  resources :log_receipts, only: %i[index show]
 
   devise_for :users
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LogReceipt < ApplicationRecord
   include Hashid::Rails
 
@@ -19,10 +21,12 @@ class LogReceipt < ApplicationRecord
   private
 
   def invoice_date_validation
-    errors.add(:invoiced_at, "is not in correct format") unless valid_invoiced_at_format?
+    errors.add(:invoiced_at, 'is not in correct format') unless valid_invoiced_at_format?
   end
 
   def valid_invoiced_at_format?
-    Date.parse(invoiced_at&.to_s) rescue false
+    Date.parse(invoiced_at&.to_s)
+  rescue StandardError
+    false
   end
 end

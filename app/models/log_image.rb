@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class LogImage < ApplicationRecord
   THUMBNAIL_WIDTH = 150
-  VALID_FILE_TYPES = ["image/jpeg", "image/png"]
+  VALID_FILE_TYPES = ['image/jpeg', 'image/png'].freeze
   MAXIMUM_IMAGE_SIZE_MB = 1
 
   belongs_to :log_receipt
@@ -11,12 +13,13 @@ class LogImage < ApplicationRecord
 
   def thumbnail
     return nil if attached_image.blank?
+
     attached_image.variant(resize_to_limit: [THUMBNAIL_WIDTH, nil])
   end
 
   private
 
-  def has_image_file?
+  def image_file?
     VALID_FILE_TYPES.include?(attached_image.content_type)
   end
 
@@ -25,8 +28,8 @@ class LogImage < ApplicationRecord
   end
 
   def attached_image_validator
-    errors.add(:attached_image, "is not attached") and return if attached_image.blank?
+    errors.add(:attached_image, 'is not attached') && return if attached_image.blank?
     errors.add(:attached_image, "is larger than #{MAXIMUM_IMAGE_SIZE_MB} MB") if image_too_large?
-    errors.add(:attached_image, "is not JPEG/PNG image") unless has_image_file?
+    errors.add(:attached_image, 'is not JPEG/PNG image') unless image_file?
   end
 end

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register LogReceipt do
-  form html: { enctype: "multipart/form-data" } do |f|
-    f.inputs "LogReceipt", multipart: true do
+  form html: { enctype: 'multipart/form-data' } do |f|
+    f.inputs 'LogReceipt', multipart: true do
       f.input :invoiced_at, as: :datepicker, start_year: 1900
       f.input :amount
       f.input :quantity
@@ -29,9 +31,7 @@ ActiveAdmin.register LogReceipt do
     column :average_diameter
     column :average_length
 
-    column 'User' do |log_receipt|
-      log_receipt.user_email
-    end
+    column 'User', &:user_email
 
     column 'Gallery Images' do |log_receipt|
       log_receipt.log_images.each do |log_image|
@@ -53,10 +53,8 @@ ActiveAdmin.register LogReceipt do
       row :average_weight
       row :average_diameter
       row :average_length
-  
-      row 'User' do |log_receipt|
-        log_receipt.user_email
-      end
+
+      row 'User', &:user_email
 
       row 'Gallery Images' do |log_receipt|
         log_receipt.log_images.each do |log_image|
@@ -68,5 +66,6 @@ ActiveAdmin.register LogReceipt do
     end
   end
 
-  permit_params :user_id, :invoiced_at, :average_diameter, :quantity, :average_weight, :average_length, :amount, log_images_attributes: [:id, :attached_image, :_destroy]
+  permit_params :user_id, :invoiced_at, :average_diameter, :quantity, :average_weight, :average_length, :amount,
+                log_images_attributes: %i[id attached_image _destroy]
 end
