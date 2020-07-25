@@ -1,4 +1,4 @@
-# Relax Gaming Test Application
+# Timbeter Test Application
 
 Loom Video Link for all functionalities mentioned:
 https://www.loom.com/share/5aba683077504b54b7267d868657b9c5
