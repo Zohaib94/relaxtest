@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_22_180329) do
+ActiveRecord::Schema.define(version: 2020_07_20_163509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,45 +72,6 @@ ActiveRecord::Schema.define(version: 2020_07_22_180329) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "dashboard_items", force: :cascade do |t|
-    t.integer "item_type", default: 0
-    t.boolean "display", default: true
-    t.text "content"
-    t.bigint "dashboard_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["dashboard_id"], name: "index_dashboard_items_on_dashboard_id"
-  end
-
-  create_table "dashboards", force: :cascade do |t|
-    t.string "title"
-    t.integer "position"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_dashboards_on_user_id"
-  end
-
-  create_table "log_images", force: :cascade do |t|
-    t.bigint "log_receipt_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["log_receipt_id"], name: "index_log_images_on_log_receipt_id"
-  end
-
-  create_table "log_receipts", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.datetime "invoiced_at"
-    t.float "average_diameter"
-    t.integer "quantity"
-    t.float "average_weight"
-    t.float "average_length"
-    t.float "amount"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_log_receipts_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -119,14 +80,9 @@ ActiveRecord::Schema.define(version: 2020_07_22_180329) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "role", limit: 30, default: "free"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "dashboard_items", "dashboards"
-  add_foreign_key "dashboards", "users"
-  add_foreign_key "log_images", "log_receipts"
-  add_foreign_key "log_receipts", "users"
 end

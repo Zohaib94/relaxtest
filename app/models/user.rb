@@ -6,7 +6,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :dashboards
   has_many :log_receipts
 
   ROLES = {

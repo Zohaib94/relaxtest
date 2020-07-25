@@ -5,16 +5,6 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  resources :dashboards, except: [:show] do
-    collection do
-      get :preview
-    end
-
-    member do
-      patch :sort
-    end
-  end
-
   resources :log_receipts, only: %i[index show]
 
   devise_for :users
