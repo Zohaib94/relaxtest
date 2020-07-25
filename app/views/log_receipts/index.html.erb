@@ -1,0 +1,7 @@
+<h1>Log Receipts</h1>
+
+<% if @log_receipts.present? %>
+  <%= render 'log_receipts/partials/table' %>
+<% else %>
+  <%= render 'log_receipts/partials/landing_text', text: 'You do not have any log receipts at the moment!' %>
+<% end %>

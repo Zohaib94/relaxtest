@@ -1,8 +1,0 @@
-<h1>Dashboards</h1>
-<% if @dashboards.present? %>
-  <%= render 'table' %>
-  <br/>
-  <%= link_to 'New Dashboard', new_dashboard_path, class: 'btn btn-primary' %>
-<% else %>
-  <%= render 'landing_text' %>
-<% end %>

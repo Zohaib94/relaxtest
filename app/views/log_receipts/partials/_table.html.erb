@@ -1,0 +1,25 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th scope='col'>Invoice Date</th>
+      <th scope='col'>Average Weight</th>
+      <th scope='col'>Average Length</th>
+      <th scope='col'>Average Diameter</th>
+      <th scope='col'>Amount</th>
+      <th scope='col'>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @log_receipts.each do |log_receipt| %>
+      <tr data-id="<%= log_receipt.hashid %>">
+        <td><%= log_receipt.invoiced_at %></td>
+        <td><%= average_weight_for(log_receipt) %></td>
+        <td><%= average_length_for(log_receipt) %></td>
+        <td><%= average_diameter_for(log_receipt) %></td>
+        <td><%= log_receipt.amount %></td>
+        <td><%= log_receipt.quantity %></td>
+        <td><%= link_to 'View Gallery', log_receipt, class: 'btn btn-dark' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

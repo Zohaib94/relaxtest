@@ -1,0 +1,11 @@
+<% @log_receipt.log_images.each_slice(3) do |image_row| %>
+  <div class='row'>
+    <% image_row.each do |image_col| %>
+      <div class='col-md-4'>
+        <%= link_to url_for(image_col.attached_image), target: :_blank do %>
+          <%= image_tag image_col.thumbnail %>     
+        <% end %>  
+      </div>
+    <% end %>
+  </div>
+<% end %>

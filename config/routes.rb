@@ -1,17 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :dashboards, except: [:show] do
-    collection do
-      get :preview
-    end
+  devise_for :admin_users, ActiveAdmin::Devise.config
 
-    member do
-      patch :sort
-    end
-  end
+  ActiveAdmin.routes(self)
+
+  resources :log_receipts, only: %i[index show]
 
   devise_for :users
 
-  root to: 'dashboards#index'
+  root to: 'log_receipts#index'
 end
